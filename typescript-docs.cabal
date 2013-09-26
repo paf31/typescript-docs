@@ -1,0 +1,26 @@
+name: typescript-docs
+version: 0.0.1
+cabal-version: >=1.2
+build-type: Simple
+license: MIT
+license-file: LICENSE
+copyright: (c) DICOM Grid Inc. 2013
+maintainer: Phillip Freeman <paf31@cantab.net>
+stability: experimental
+homepage: http://github.com/paf31/typescript-docs
+synopsis: A documentation generator for TypeScript Definition files
+description: A documentation generator for TypeScript Definition files
+category: Language
+author: Phillip Freeman <paf31@cantab.net>
+data-dir: ""
+
+executable typescript-docs
+    build-depends: utf8-string -any, syb -any, split -any,
+                   filepath -any, filemanip -any, cmdtheline -any, containers -any,
+                   blaze-html -any, parsec -any, base -any, language-typescript -any
+    main-is: Main.hs
+    buildable: True
+    hs-source-dirs: src
+    other-modules: Language.TypeScript.Docs
+                   Language.TypeScript.Docs.Html Language.TypeScript.Docs.Comments
+
