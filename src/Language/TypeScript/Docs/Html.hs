@@ -422,6 +422,6 @@ generateDocument ds = do
         header 1 $ H.toHtml ("Interfaces" :: String)
         mapM_ (renderInterface [] 2) interfaces
       let declarations = ambientDeclarations ds
-      unless (null interfaces) $ do
+      unless (null declarations) $ do
         header 1 $ H.toHtml ("Declarations" :: String)
         renderAmbientDeclarations [] 2 (map (\(a, b, c) -> (a, b, Just c)) declarations)
