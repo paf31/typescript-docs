@@ -1,5 +1,5 @@
 name: typescript-docs
-version: 0.0.2
+version: 0.0.3
 cabal-version: >=1.4
 build-type: Simple
 license: MIT
@@ -17,7 +17,7 @@ data-dir: ""
 executable typescript-docs
     build-depends: utf8-string -any, syb -any, split -any,
                    filepath -any, filemanip -any, cmdtheline -any, containers -any,
-                   blaze-html -any, parsec -any, base >= 3 && <= 5, language-typescript -any
+                   blaze-html -any, parsec -any, base >= 3 && <= 5, language-typescript >= 0.0.3
     main-is: Main.hs
     buildable: True
     hs-source-dirs: src

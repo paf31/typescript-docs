@@ -68,12 +68,12 @@ parseComment = fst . foldr go (Comment [] [], True)
       let
         (key, value) = break (== ' ') rest
       in
-        (comment { other = (key, dropWhile isSpace value):other comment}, True)
+        (comment { commentOther = (key, dropWhile isSpace value):commentOther comment}, True)
     go line (comment, _) | all isSpace line = (comment, True)
     go line (comment, True) =
-      (comment { text = line:text comment }, False)
-    go line (comment@Comment{ text = init:tail }, False) =
-      (comment { text = (line ++ " " ++ init):tail }, False)
+      (comment { commentText = line:commentText comment }, False)
+    go line (comment@Comment{ commentText = init:tail }, False) =
+      (comment { commentText = (line ++ " " ++ init):tail }, False)
 
 appendComments :: String -> [DeclarationElement] -> [DeclarationElement]
 appendComments source = everywhere (mkT appendComments')

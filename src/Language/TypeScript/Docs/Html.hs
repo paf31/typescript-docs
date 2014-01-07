@@ -75,9 +75,9 @@ squares = surround (syntax "[") (syntax "]")
 renderComment :: CommentPlaceholder -> H.Html
 renderComment (Left _) = mempty
 renderComment (Right comments) = do
-  flip mapM_ (text comments) $ \line ->
+  flip mapM_ (commentText comments) $ \line ->
     H.p ! A.class_ "comments" $ H.toHtml line
-  let groups = groupBy ((==) `on` fst) (other comments)
+  let groups = groupBy ((==) `on` fst) (commentOther comments)
   flip mapM_ groups $ \all@((key,_):_) -> do
     H.p $ H.strong $ H.toHtml key
     H.ul $ mapM_ (H.li . renderCommentKeyValuePair) all
@@ -377,8 +377,10 @@ ambientModuleDeclarations =
   . mapMaybe p
   where
   p (e, AmbientModuleDeclaration com names ambs, com1) = Just (e, intercalate "." names, ambs, com <.> com1)
-  p (e, AmbientExternalModuleDeclaration com name ambs, com1) = Just (e, name, ambs, com <.> com1)
+  p (e, AmbientExternalModuleDeclaration com name ambs, com1) = Just (e, name, mapMaybe q ambs, com <.> com1)
   p _ = Nothing
+  q (AmbientModuleElement a) = Just a
+  q _ = Nothing
   collect = foldl1 (\(e1, name, els1, com1) (e2, _, els2, com2) -> (e1 `mplus` e2, name, els1 ++ els2, com1 <..> Just com2))
 
 renderAmbientModuleDeclaration :: [String] -> Int -> (Maybe Exported, String, [Ambient], Maybe CommentPlaceholder) -> H.Html
