@@ -16,7 +16,7 @@ data-dir: ""
 
 executable typescript-docs
     build-depends: utf8-string -any, syb -any, split -any,
-                   filepath -any, filemanip -any, cmdtheline -any, containers -any,
+                   filepath -any, filemanip -any, cmdtheline >=0.2.3, containers -any,
                    blaze-html -any, parsec -any, base >= 3 && <= 5, language-typescript >= 0.0.3
     main-is: Main.hs
     buildable: True
